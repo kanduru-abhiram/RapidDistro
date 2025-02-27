@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import Navbar from "./Navbar";
+import TransferAmount from "./TransferAmount";
 
 const Dashboard = () => {
   return (
-    <div className="flex h-screen">
-      <Sidebar />
-      <div className="ml-64 w-full p-6">
-        <Outlet />
-      </div>
+    <div>
+      <Navbar />
+      <Outlet />
+      <TransferAmount />
     </div>
   );
 };
