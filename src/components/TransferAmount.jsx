@@ -5,15 +5,29 @@ const TransferAmount = () => {
   const [receivers, setReceivers] = useState([{ address: "", amount: "" }]);
 
   const handleAddReceiver = () => {
+    // if (amount < 0) then alert("Amount can't be negative.");
     setReceivers([...receivers, { address: "", amount: "" }]);
   };
 
   const handleChange = (event, index) => {
     const { name, value } = event.target;
     const newReceivers = [...receivers];
-    newReceivers[index][name] = value;
+
+    if (name === "amount" && parseFloat(value) < 0) {
+      newReceivers[index][name] = 0;
+    } else {
+      newReceivers[index][name] = value;
+    }
+
     setReceivers(newReceivers);
   };
+
+  // const handleChange = (event, index) => {
+  //   const { name, value } = event.target;
+  //   const newReceivers = [...receivers];
+  //   newReceivers[index][name] = value;
+  //   setReceivers(newReceivers);
+  // };
 
   const handleDeleteReceiver = (index) => {
     setReceivers(receivers.filter((_, i) => i !== index));
@@ -23,8 +37,11 @@ const TransferAmount = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4">
   <div className="w-full max-w-lg bg-white shadow-xl rounded-2xl p-6 sm:p-8">
     {/* Title */}
-    <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">🚀 RapidDistro</h2>
-
+    {/* <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">🚀 RapidDistro</h2> */}
+    <div className="flex justify-center">
+      <img src="./RapidDistro-logo.png" className="text-2xl font-bold text-gray-800 mb-6" width={150}/>
+    </div>
+    
     {/* Token Address Input */}
     <div className="mb-6">
       <label className="block text-sm font-medium text-gray-600 mb-2">Token Address</label>
